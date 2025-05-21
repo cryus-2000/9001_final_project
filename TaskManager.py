@@ -25,6 +25,7 @@ class TaskManager:
                 data = json.load(f)
                 # here transfer the json data to the task objects
                 return [Task.from_dict(task) for task in data]
+        # if the file does not exist or the json is invalid, create a new task file
         except (FileNotFoundError, json.JSONDecodeError):
             print(f"Warning: Could not load tasks from '{self.filename}'. A new task list will be created.")
             return []
