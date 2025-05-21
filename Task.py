@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 
 class Task:
@@ -13,7 +12,7 @@ class Task:
         else:
             self.id = Task.id_counter
             # increment the counter for the next task
-            Task.id_counter += 1         
+        Task.id_counter += 1          
         # actual number of charcaters
         self.num_people = num_people    
         # time period for the task(day, night)
@@ -80,9 +79,26 @@ class Task:
             'price': self.price
         }
     
+    # here we use the static method to convert the dictionary to a task object
+    # this is used when we load the tasks from the json file
+    @staticmethod
+    def from_dict(d):
+        return Task(
+            num_people=d['num_people'],
+            time_period=d['time_period'],
+            location_type=d['location_type'],
+            location_detail=d['location_detail'],
+            character=d['character'],
+            shoot_date_str=d['shoot_date'],
+            task_id=d['id']
+        )
+
 
 if __name__ == "__main__":
-    new_task = Task(2, 'day', 'indoor', 'studio in sydney', 'Christina', '2025-10-01')
-    print(new_task)
+    # new_task = Task(2, 'day', 'indoor', 'studio in sydney', 'Christina', '2025-10-01')
+    # print(new_task)
     new_task_2 = Task(3, 'day', 'indoor', 'studio in sydney', 'Christina', '2023-10-01')
-    print(new_task_2)
+    # print(new_task_2)
+    # print(new_task_2.to_dict())
+    print(type(new_task_2.from_dict(new_task_2.to_dict())))
+    # print(new_task_2.is_due_soon())
