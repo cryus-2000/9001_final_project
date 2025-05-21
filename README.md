@@ -67,7 +67,7 @@ completed         : False
 price             : 200
 -------------------------
 ```
-## ✍️ Author
+## Author
 
 Xihang Cai  
 COMP9001 Python final project  
