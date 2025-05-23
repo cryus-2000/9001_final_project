@@ -31,7 +31,7 @@ class TaskManager:
             return []
 
     def save_tasks(self):
-        # save the tasks to the json file
+        # save the tasks to the json file with mode 'w' to overwrite the file
         with open(self.filename, 'w', encoding='utf-8') as f:
             json.dump([t.to_dict() for t in self.tasks], f, indent=2)
 
@@ -41,18 +41,15 @@ class TaskManager:
         self.save_tasks()
 
     def delete_task(self, task_id):
-        self.tasks = [t for t in self.tasks if t.id != task_id]
-        self.save_tasks()
-
-    def update_task(self, task_id, **kwargs):
-        for task in self.tasks:
-            if task.id == task_id:
-                for key, value in kwargs.items():
-                    if hasattr(task, key):
-                        setattr(task, key, value)
-                task.price = task.calculate_price()
-                break
-        self.save_tasks()
+        # here delete a task from the list of tasks
+        if task_id in [t.id for t in self.tasks]:
+            # if the task id is in the list of tasks, then delete it
+            self.tasks = [t for t in self.tasks if t.id != task_id]
+            self.save_tasks()
+            return True
+        else:
+            # if the task id is not in the list of tasks, then return false
+            return False
 
     def get_all_tasks(self):
         #get all tasks sorted by shoot date
@@ -62,7 +59,7 @@ class TaskManager:
     # The following functions are used to get the total price and count of uncompleted tasks
     def get_total_price(self):
         # calculate the total price of all tasks
-        return sum(task.price for task in self.tasks if not task.completed)
+        return sum(task.price for task in self.tasks if task.completed)
 
     def count_tasks(self):
         # count the number of tasks that are not completed

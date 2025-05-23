@@ -9,8 +9,7 @@ A command-line task manager for cosplay photographers to manage upcoming shoots,
 - Add a new photoshoot task
 - View all tasks sorted by shoot date
 - Delete a task by ID
-- Update task details (e.g., location, time, number of people)
-- Display statistics: total tasks, completion status, total price
+- Display statistics: total tasks, total earned price
 - Persistent storage using JSON file
 - Fully wrapped input validation
 
@@ -35,11 +34,8 @@ PhotoTaskManager/
 2. Run the following command in your terminal:
 
 ```bash
-python main.py
+python3 main.py
 ```
-
-3. Follow the menu instructions to add, view, or update tasks.
-
 > The `data.json` file will be created automatically on first use.
 
 ---

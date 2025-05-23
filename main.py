@@ -1,5 +1,6 @@
 from Task import Task
 from TaskManager import TaskManager
+from datetime import datetime
 
 
 def main():
@@ -12,9 +13,8 @@ Photographer Task Manager
 1. Add Task
 2. View All Tasks (Sorted by Date)
 3. Delete Task
-4. Update Task
-5. View Statistics (Total Tasks(completed and uncompleted) / Total Price)
-6. Exit
+4. View Statistics (completed and uncompleted Tasks / Total Price)
+5. Exit
 -----------------------------
 """)
         choice = input("Enter your choice: ").strip()
@@ -22,6 +22,7 @@ Photographer Task Manager
         if choice == '1':
             try:
                 try:
+                    # validate number of people
                     num_people = int(input("Number of people (>=1): "))
                     if num_people < 1:
                         raise ValueError("Number of people must be >= 1.")
@@ -33,6 +34,7 @@ Photographer Task Manager
                     time_period = input("Time of shoot (day/night): ").strip().lower()
                     if time_period not in ['day', 'night']:
                         raise ValueError("Time period must be 'day' or 'night'.")
+                    # validate time period whether it is day or night
                 except ValueError as ve:
                     print(f"Invalid time period: {ve}")
                     continue
@@ -41,14 +43,18 @@ Photographer Task Manager
                     location_type = input("Location type (indoor/outdoor): ").strip().lower()
                     if location_type not in ['indoor', 'outdoor']:
                         raise ValueError("Location type must be 'indoor' or 'outdoor'.")
+                    # validate location type whether it is indoor or outdoor
                 except ValueError as ve:
                     print(f"Invalid location type: {ve}")
                     continue
 
+                # enter location detail
                 location_detail = input("Specific location: ").strip()
-                cosplay_role = input("Cosplay role: ").strip()
+                # enter character name
+                cosplay_role = input("Cosplay character: ").strip()
 
                 try:
+                    # enter shoot date
                     shoot_date_input = input("Shoot date (YYYY-MM-DD): ").strip()
                     datetime.strptime(shoot_date_input, '%Y-%m-%d')
                 except ValueError:
@@ -69,33 +75,26 @@ Photographer Task Manager
                 print(task)
 
         elif choice == '3':
-            task_id = input("Enter the task ID to delete (e.g., T1): ").strip()
+            task_id = input("Enter the task ID to delete (e.g. 1): ").strip()
+            # validate task id whether it is a number
+            try:
+                task_id = int(task_id)
+            except ValueError:
+                print("Invalid task ID. Please enter a number.")
+                continue
+
             if manager.delete_task(task_id):
                 print("Task deleted successfully!")
             else:
                 print("Task not found.")
-
-        elif choice == '4':
-            try:
-                task_id = int(input("Enter the task ID to update (just the number): "))
-                field = input("Which field would you like to update? ").strip()
-                value = input("New value: ").strip()
-                if field == 'num_people':
-                    value = int(value)
-                elif field == 'shoot_date':
-                    datetime.strptime(value, '%Y-%m-%d')  # validate date format
-                manager.update_task(task_id, **{field: value})
-                print("Task updated successfully.")
-            except Exception as e:
-                print(f"Failed to update task: {e}")
                 
-        elif choice == '5':
+        elif choice == '4':
             print(f"""
 Total active tasks: {manager.count_tasks()[0]}
 Total finished tasks: {manager.count_tasks()[1]} 
 Total price earned: ${manager.get_total_price()}""")
 
-        elif choice == '6':
+        elif choice == '5':
             print("Goodbye!")
             break
 

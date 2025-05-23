@@ -100,5 +100,5 @@ if __name__ == "__main__":
     new_task_2 = Task(3, 'day', 'indoor', 'studio in sydney', 'Christina', '2023-10-01')
     # print(new_task_2)
     # print(new_task_2.to_dict())
-    print(type(new_task_2.from_dict(new_task_2.to_dict())))
+    # print(type(new_task_2.from_dict(new_task_2.to_dict())))
     # print(new_task_2.is_due_soon())

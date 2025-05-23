@@ -1,24 +1,13 @@
 [
   {
-    "id": 2,
-    "num_people": 3,
-    "time_period": "day",
-    "location_type": "indoor",
-    "location_detail": "studio in sydney",
-    "character": "Christina",
-    "shoot_date": "2023-10-01",
-    "completed": true,
-    "price": 200
-  },
-  {
-    "id": 3,
+    "id": 1,
     "num_people": 1,
     "time_period": "day",
-    "location_type": "outdoor",
-    "location_detail": "sydney opera house",
-    "character": "free",
-    "shoot_date": "2025-10-01",
+    "location_type": "indoor",
+    "location_detail": "school",
+    "character": "miku",
+    "shoot_date": "2025-06-10",
     "completed": false,
-    "price": 120
+    "price": 100
   }
 ]
